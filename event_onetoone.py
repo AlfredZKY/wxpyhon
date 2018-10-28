@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 # Author:Alfred
 
+# -*- coding:utf-8 -*-
+# Author:Alfred
 
 import wx
 
@@ -9,10 +11,17 @@ import wx
 class MyFrame(wx.Frame):
 
     def __init__(self):
-        super().__init__(parent = None,title = "第一个GUI程序！",size = (400,200),pos = (100,100))
+        super().__init__(parent = None,title = "第一个GUI程序！",size = (400,200))
         self.Center()                       # 设置窗口居中
         panel = wx.Panel(parent = self)     # 在窗口中加入面板，父参数就是窗口实例
-        statictext = wx.StaticText(parent = panel,label = "hello world",pos = (10,10))
+        self.statictext = wx.StaticText(parent = panel,pos = (160,20))
+        b = wx.Button(parent = panel , label = "OK" ,pos = (150,40))
+        self.Bind(wx.EVT_BUTTON, self.on_click,b)     #一对一进行事件绑定
+
+    def on_click(self,event):
+        print(type(event))
+        self.statictext.SetLabelText("Hello world")
+
 
 # 自定程序类
 class App(wx.App):
