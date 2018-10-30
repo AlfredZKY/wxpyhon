@@ -8,7 +8,7 @@ class MyFrame(wx.Frame):
 
     def __init__(self):
         # 初始化父类
-        super().__init__(parent = None , title = "BoxSizer",size = (300,120))
+        super().__init__(parent = None , title = "StaticBoxSizer",size = (300,120))
         self.Center()                           # 设置窗口居中
         panel = wx.Panel(parent = self)         # 设置一个面板，并绑定到窗口，窗口就是父参数
 
@@ -30,12 +30,18 @@ class MyFrame(wx.Frame):
         # 将两个按钮和面板绑定并绑定事件处理函数
         self.Bind(wx.EVT_BUTTON,self.on_click,id = 10 ,id2 = 20 )
 
+        # 构建一个静态文本框
+        sb = wx.StaticBox(parent = panel,label = "按钮框")
+
+        # 构建一个静态布局管理器
+        sbox = wx.StaticBoxSizer(sb,wx.HORIZONTAL)
+
         # 将两个按钮绑定到水平布局管理器中
-        hbox.Add(b1, proportion = 0, flag = wx.BOTTOM | wx.EXPAND, border = 5)
-        hbox.Add(b2, proportion = 0, flag = wx.BOTTOM | wx.EXPAND, border = 5)
+        sbox.Add(b1, proportion = 0, flag = wx.BOTTOM | wx.EXPAND, border = 5)
+        sbox.Add(b2, proportion = 0, flag = wx.BOTTOM | wx.EXPAND, border = 5)
 
         # 将水平管理器添加到垂直管理器中
-        vbox.Add(hbox,proportion = 1,flag = wx.CENTER)
+        vbox.Add(sbox,proportion = 1,flag = wx.CENTER)
 
         # 最后一定要把管理器设置到面板中
         panel.SetSizer(vbox)
